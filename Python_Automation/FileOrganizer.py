@@ -8,18 +8,26 @@ if not path.is_dir():
     exit()
 
 for file in path.iterdir():
-    if not file.is_file():
-        continue
     target_folder = ""
-    
-
+    if file.is_dir():
+        target_folder ="Folders"
     match file.suffix.lower() : 
         case  ".exe" :
             target_folder="Applications"
         case ".jpg" | ".jpeg" | ".png" | ".gif" | ".webp" :
             target_folder="Pictures"
-        case  ".txt" | ".pdf" | ".docx": 
+        case  ".txt" | ".pdf" | ".docx" | ".xlsx": 
             target_folder="Documents"
+        case ".mp4" :
+            target_folder="Videos"
+        case ".zip" |".rar" :
+            target_folder="Compressed"
+        case ".mp3" :
+            target_folder="Music"
+        case ".iso" : 
+            target_folder="ISO-files"
+        
+        
     if target_folder : 
         dest = path / target_folder
         dest.mkdir(parents=True , exist_ok=True)
